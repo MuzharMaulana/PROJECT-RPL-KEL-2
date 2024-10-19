@@ -72,7 +72,7 @@
         }
         .folder-notes {
             margin-top: 10px; /* Jarak dari nama folder */
-            display: none; /* Sembunyikan catatan di dalam folder secara default */
+            display: none; 
         }
     </style>
 </head>
