@@ -89,9 +89,6 @@ $notesResult = $conn->query("SELECT notes.*, categories.nama_kategori FROM notes
         <h2>Menu</h2>
         <ul>
             <li><a href="dashboard.php">Dashboard</a></li>
-            <li><a href="kuliah.php">Kuliah</a></li>
-            <li><a href="kantor.php">Kantor</a></li>
-            <li><a href="pribadi.php">Pribadi</a></li>
             <li><a href="add_note.php">Tambah Catatan</a></li>
             <li><a href="logout.php">Keluar</a></li>
         </ul>
