@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result->num_rows > 0) {
         echo "<div class='alert alert-danger text-center'>Username sudah terdaftar.</div>";
     } else {
-        // Simpan pengguna baru
+        // Simpan pengguna
         $stmt = $conn->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
         $stmt->bind_param("ss", $username, $password);
         $stmt->execute();
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-<!DOCTYPE html>
+
 <html lang="id">
 <head>
     <meta charset="UTF-8">
