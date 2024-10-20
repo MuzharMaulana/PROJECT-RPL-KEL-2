@@ -15,8 +15,21 @@ include 'config.php'; // Pastikan ini termasuk sebelum query database
 $sql = "SELECT * FROM categories";
 $result = $conn->query($sql);
 
-// Ambil catatan
-$notesResult = $conn->query("SELECT notes.*, categories.nama_kategori FROM notes LEFT JOIN categories ON notes.kategori_id = categories.id ORDER BY tanggal DESC");
+// Ambil nilai pencarian dari form jika ada
+$searchKeyword = isset($_GET['search']) ? $_GET['search'] : '';
+
+// Query untuk mengambil catatan, tambahkan filter judul jika ada pencarian
+$query = "SELECT notes.*, categories.nama_kategori 
+          FROM notes 
+          LEFT JOIN categories ON notes.kategori_id = categories.id";
+
+if ($searchKeyword) {
+    // Tambahkan kondisi WHERE untuk mencari judul
+    $query .= " WHERE notes.judul LIKE '%" . $conn->real_escape_string($searchKeyword) . "%'";
+}
+
+$query .= " ORDER BY tanggal DESC";
+$notesResult = $conn->query($query);
 ?>
 
 <!DOCTYPE html>
@@ -64,21 +77,11 @@ $notesResult = $conn->query("SELECT notes.*, categories.nama_kategori FROM notes
             margin-left: 250px; /* Space for the sidebar */
             padding: 30px;
         }
-        .card-category {
-            border: 1px solid #007bff;
-            border-radius: 10px;
-            transition: transform 0.2s;
-            margin: 10px 0;
-        }
-        .card-category:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
-        }
-        .btn-custom {
-            border-radius: 25px;
-        }
         .note-card {
             margin-top: 20px;
+        }
+        .search-box {
+            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -97,37 +100,17 @@ $notesResult = $conn->query("SELECT notes.*, categories.nama_kategori FROM notes
     <!-- Main Content -->
     <div class="content float-right" style="width: calc(100% - 250px);">
         <h2 class="mt-4">Selamat Datang di Dashboard Catatan</h2>
-        <p class="lead">Pilih kategori untuk melihat catatan Anda:</p>
+        <p class="lead">Kelola catatanmu dengan mudah!</p>
 
-        <div class="row mb-4">
-            <div class="col-md-4">
-                <div class="card card-category">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Kuliah</h5>
-                        <p class="card-text">Lihat semua catatan kuliah Anda.</p>
-                        <a href="kuliah.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
-                    </div>
+        <!-- Form Pencarian -->
+        <form method="GET" action="dashboard.php" class="search-box">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control" placeholder="Cari catatan berdasarkan judul..." value="<?php echo htmlspecialchars($searchKeyword); ?>">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">Cari</button>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card card-category">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Kantor</h5>
-                        <p class="card-text">Lihat semua catatan kantor Anda.</p>
-                        <a href="kantor.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card card-category">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Pribadi</h5>
-                        <p class="card-text">Lihat semua catatan pribadi Anda.</p>
-                        <a href="pribadi.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </form>
 
         <h4 class="mt-4">Catatan Terakhir:</h4>
         <div id="savedNotes">
@@ -153,7 +136,6 @@ $notesResult = $conn->query("SELECT notes.*, categories.nama_kategori FROM notes
             <?php endif; ?>
         </div>
     </div>
-
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
