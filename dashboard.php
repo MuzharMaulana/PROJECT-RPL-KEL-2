@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-// Jika sudah login, tampilkan dashboard
+// Jika sudah login, tampilkan dashboar
 ?>
 
 <?php
