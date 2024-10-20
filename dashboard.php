@@ -122,6 +122,35 @@ $notesResult = $conn->query($query);
                     <button class="btn btn-primary" type="submit">Cari</button>
                 </div>
             </div>
+            <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="card card-category">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Kuliah</h5>
+                        <p class="card-text">Lihat semua catatan kuliah Anda.</p>
+                        <a href="kuliah.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-category">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Kantor</h5>
+                        <p class="card-text">Lihat semua catatan kantor Anda.</p>
+                        <a href="kantor.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-category">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Pribadi</h5>
+                        <p class="card-text">Lihat semua catatan pribadi Anda.</p>
+                        <a href="pribadi.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
+                    </div>
+                </div>
+            </div>
+        </div>
         </form>
 
         <!-- Dropdown Kategori -->
