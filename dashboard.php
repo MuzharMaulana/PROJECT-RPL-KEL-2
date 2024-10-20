@@ -13,19 +13,28 @@ include 'config.php'; // Pastikan ini termasuk sebelum query database
 
 // Ambil semua kategori dari database untuk dropdown
 $sql = "SELECT * FROM categories";
-$result = $conn->query($sql);
+$categoriesResult = $conn->query($sql);
 
 // Ambil nilai pencarian dari form jika ada
 $searchKeyword = isset($_GET['search']) ? $_GET['search'] : '';
 
-// Query untuk mengambil catatan, tambahkan filter judul jika ada pencarian
+// Ambil kategori yang dipilih
+$selectedCategory = isset($_GET['kategori_id']) ? $_GET['kategori_id'] : '';
+
+// Query untuk mengambil catatan, tambahkan filter judul dan kategori jika ada
 $query = "SELECT notes.*, categories.nama_kategori 
           FROM notes 
-          LEFT JOIN categories ON notes.kategori_id = categories.id";
+          LEFT JOIN categories ON notes.kategori_id = categories.id 
+          WHERE 1=1";
 
 if ($searchKeyword) {
-    // Tambahkan kondisi WHERE untuk mencari judul
-    $query .= " WHERE notes.judul LIKE '%" . $conn->real_escape_string($searchKeyword) . "%'";
+    // Tambahkan kondisi untuk pencarian berdasarkan judul
+    $query .= " AND notes.judul LIKE '%" . $conn->real_escape_string($searchKeyword) . "%'";
+}
+
+if ($selectedCategory) {
+    // Tambahkan kondisi untuk filter berdasarkan kategori
+    $query .= " AND notes.kategori_id = " . intval($selectedCategory);
 }
 
 $query .= " ORDER BY tanggal DESC";
@@ -83,6 +92,9 @@ $notesResult = $conn->query($query);
         .search-box {
             margin-bottom: 20px;
         }
+        .categories {
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
@@ -110,6 +122,22 @@ $notesResult = $conn->query($query);
                     <button class="btn btn-primary" type="submit">Cari</button>
                 </div>
             </div>
+        </form>
+
+        <!-- Dropdown Kategori -->
+        <form method="GET" action="dashboard.php" class="categories">
+            <div class="form-group">
+                <label for="kategori">Filter berdasarkan Kategori:</label>
+                <select name="kategori_id" id="kategori" class="form-control">
+                    <option value="">Semua Kategori</option>
+                    <?php while ($category = $categoriesResult->fetch_assoc()): ?>
+                        <option value="<?php echo $category['id']; ?>" <?php echo ($selectedCategory == $category['id']) ? 'selected' : ''; ?>>
+                            <?php echo $category['nama_kategori']; ?>
+                        </option>
+                    <?php endwhile; ?>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Filter</button>
         </form>
 
         <h4 class="mt-4">Catatan Terakhir:</h4>
