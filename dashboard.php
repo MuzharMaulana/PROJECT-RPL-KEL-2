@@ -147,7 +147,6 @@ $notesResult = $conn->query($query);
                     <div class="card note-card">
                         <div class="card-body">
                             <h5 class="card-title"><?php echo $note['judul']; ?></h5>
-                            <p class="card-text"><?php echo $note['catatan']; ?></p>
                             <p><strong>Kategori:</strong> <?php echo $note['nama_kategori']; ?></p>
                             <p><strong>Tanggal:</strong> <?php echo $note['tanggal']; ?></p>
                             <div class="d-flex justify-content-between">
