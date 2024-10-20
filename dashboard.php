@@ -122,12 +122,41 @@ $notesResult = $conn->query($query);
                     <button class="btn btn-primary" type="submit">Cari</button>
                 </div>
             </div>
+            <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="card card-category">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Kuliah</h5>
+                        <p class="card-text">Lihat semua catatan kuliah Anda.</p>
+                        <a href="kuliah.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-category">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Kantor</h5>
+                        <p class="card-text">Lihat semua catatan kantor Anda.</p>
+                        <a href="kantor.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-category">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Pribadi</h5>
+                        <p class="card-text">Lihat semua catatan pribadi Anda.</p>
+                        <a href="pribadi.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
+                    </div>
+                </div>
+            </div>
+        </div>
         </form>
 
         <!-- Dropdown Kategori -->
         <form method="GET" action="dashboard.php" class="categories">
             <div class="form-group">
-                <label for="kategori">cari berdasarkan kategori:</label>
+                <label for="kategori">Cari berdasarkan kategori:</label>
                 <select name="kategori_id" id="kategori" class="form-control">
                     <option value="">Semua Kategori</option>
                     <?php while ($category = $categoriesResult->fetch_assoc()): ?>
@@ -137,32 +166,33 @@ $notesResult = $conn->query($query);
                     <?php endwhile; ?>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">cari</button>
+            <button type="submit" class="btn btn-primary">Cari</button>
         </form>
 
         <h4 class="mt-4">Catatan Terakhir:</h4>
-        <div id="savedNotes">
-            <?php if ($notesResult && $notesResult->num_rows > 0): ?>
-                <?php while ($note = $notesResult->fetch_assoc()): ?>
-                    <div class="card note-card">
-                        <div class="card-body">
-                            <h5 class="card-title"><?php echo $note['judul']; ?></h5>
-                            <p><strong>Kategori:</strong> <?php echo $note['nama_kategori']; ?></p>
-                            <p><strong>Tanggal:</strong> <?php echo $note['tanggal']; ?></p>
-                            <div class="d-flex">
-                                 <a href="edit_note.php?id=<?php echo $note['id']; ?>" class="btn btn-warning mr-2">Edit</a>
-                                 <a href="hapus_note.php?id=<?php echo $note['id']; ?>" class="btn btn-danger">Hapus</a>
-                            </div>
-                        </div>
+<div id="savedNotes">
+    <?php if ($notesResult && $notesResult->num_rows > 0): ?>
+        <?php while ($note = $notesResult->fetch_assoc()): ?>
+            <div class="card note-card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="view_note.php?id=<?php echo $note['id']; ?>"><?php echo $note['judul']; ?></a>
+                    </h5>
+                    <p><strong>Kategori:</strong> <?php echo $note['nama_kategori']; ?></p>
+                    <p><strong>Tanggal:</strong> <?php echo $note['tanggal']; ?></p>
+                    <div class="d-flex">
+                        <a href="edit_note.php?id=<?php echo $note['id']; ?>" class="btn btn-warning mr-2">Edit</a>
+                        <a href="hapus_note.php?id=<?php echo $note['id']; ?>" class="btn btn-danger">Hapus</a>
                     </div>
-                <?php endwhile; ?>
-            <?php else: ?>
-                <div class="alert alert-warning" role="alert">
-                    Tidak ada catatan ditemukan.
                 </div>
-            <?php endif; ?>
+            </div>
+        <?php endwhile; ?>
+    <?php else: ?>
+        <div class="alert alert-warning" role="alert">
+            Tidak ada catatan ditemukan.
         </div>
-    </div>
+    <?php endif; ?>
+</div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
