@@ -18,6 +18,7 @@ include 'config.php';
 $sql = "SELECT * FROM categories";
 $result = $conn->query($sql);
 
+<<<<<<< HEAD
 // Cek apakah ada kategori atau judul yang dicari
 $selectedCategory = isset($_GET['kategori_id']) ? $_GET['kategori_id'] : '';
 $searchTitle = isset($_GET['judul']) ? $_GET['judul'] : '';
@@ -41,6 +42,23 @@ if (!empty($searchTitle)) {
     }
 }
 
+=======
+// Ambil nilai pencarian dari form jika ada
+$searchKeyword = isset($_GET['search']) ? $_GET['search'] : '';
+
+// Query untuk mengambil catatan, tambahkan filter judul jika ada
+$query = "SELECT notes.*, categories.nama_kategori 
+          FROM notes 
+          LEFT JOIN categories ON notes.kategori_id = categories.id 
+          WHERE 1=1";
+
+if ($searchKeyword) {
+    // Tambahkan kondisi untuk pencariann berdasarkan judul
+    $query .= " AND notes.judul LIKE '%" . $conn->real_escape_string($searchKeyword) . "%'";
+}
+
+$query .= " ORDER BY tanggal DESC";
+>>>>>>> 00eb7a7394084679b16ad8fec62c92ed9165032d
 $notesResult = $conn->query($query);
 ?>
 
@@ -56,6 +74,7 @@ $notesResult = $conn->query($query);
         .card {
             border: 1px solid #ddd;
             border-radius: 5px;
+<<<<<<< HEAD
             padding: 16px;
             margin-bottom: 20px;
             transition: transform 0.2s;
@@ -84,6 +103,33 @@ $notesResult = $conn->query($query);
 
         .button:hover {
             background-color: #0056b3;
+=======
+            display: block;
+            transition: background-color 0.3s;
+        }
+        .sidebar ul li a:hover {
+            background-color: #4d4957;
+        }
+        .content {
+            margin-left: 250px; /* Space for the sidebar */
+            padding: 30px;
+        }
+        .card-category {
+            border: 1px solid #007bff;
+            border-radius: 10px;
+            transition: transform 0.2s;
+            margin: 10px 0;
+        }
+        .card-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+        }
+        .btn-custom {
+            border-radius: 25px;
+        }
+        .note-card {
+            margin-top: 20px;
+>>>>>>> 00eb7a7394084679b16ad8fec62c92ed9165032d
         }
     </style>
 </head>
@@ -142,5 +188,84 @@ $notesResult = $conn->query($query);
             </div>
         </div>
     </div>
+<<<<<<< HEAD
 </body>
 </html>
+=======
+
+    <!-- Main Content -->
+    <div class="content float-right" style="width: calc(100% - 250px);">
+        <h2 class="mt-4">Selamat Datang di Dashboard Catatan</h2>
+        <p class="lead">Kelola catatanmu dengan mudah!</p>
+
+        <!-- Form Pencarian -->
+        <form method="GET" action="dashboard.php" class="search-box">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control" placeholder="Cari catatan berdasarkan judul..." value="<?php echo htmlspecialchars($searchKeyword); ?>">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">Cari</button>
+                </div>
+            </div>
+        </form>
+
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="card card-category">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Kuliah</h5>
+                        <p class="card-text">Lihat semua catatan kuliah Anda.</p>
+                        <a href="kuliah.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-category">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Kantor</h5>
+                        <p class="card-text">Lihat semua catatan kantor Anda.</p>
+                        <a href="kantor.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-category">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Pribadi</h5>
+                        <p class="card-text">Lihat semua catatan pribadi Anda.</p>
+                        <a href="pribadi.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h4 class="mt-4">Catatan Terakhir:</h4>
+        <div id="savedNotes">
+            <?php if ($notesResult && $notesResult->num_rows > 0): ?>
+                <?php while ($note = $notesResult->fetch_assoc()): ?>
+                    <div class="card note-card">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="view_note.php?id=<?php echo $note['id']; ?>"><?php echo $note['judul']; ?></a>
+                            </h5>
+                            <p><strong>Kategori:</strong> <?php echo $note['nama_kategori']; ?></p>
+                            <p><strong>Tanggal:</strong> <?php echo $note['tanggal']; ?></p>
+                            <div class="d-flex">
+                                <a href="edit_note.php?id=<?php echo $note['id']; ?>" class="btn btn-warning mr-2">Edit</a>
+                                <a href="hapus_note.php?id=<?php echo $note['id']; ?>" class="btn btn-danger">Hapus</a>
+                            </div>
+                        </div>
+                    </div>
+                <?php endwhile; ?>
+            <?php else: ?>
+                <div class="alert alert-warning" role="alert">
+                    Tidak ada catatan ditemukan.
+                </div>
+            <?php endif; ?>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </body>
+</html>
+>>>>>>> 00eb7a7394084679b16ad8fec62c92ed9165032d
