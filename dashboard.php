@@ -86,6 +86,19 @@ $notesResult = $conn->query($query);
             margin-left: 250px; /* Space for the sidebar */
             padding: 30px;
         }
+        .card-category {
+            border: 1px solid #007bff;
+            border-radius: 10px;
+            transition: transform 0.2s;
+            margin: 10px 0;
+        }
+        .card-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+        }
+        .btn-custom {
+            border-radius: 25px;
+        }
         .note-card {
             margin-top: 20px;
         }
@@ -105,15 +118,13 @@ $notesResult = $conn->query($query);
         <ul>
             <li><a href="dashboard.php">Dashboard</a></li>
             <li><a href="add_note.php">Tambah Catatan</a></li>
-            <li><a href="logout.php">Keluar</a></li>
+            <li><a href="login.php">Keluar</a></li>
         </ul>
     </div>
 
     <!-- Main Content -->
     <div class="content float-right" style="width: calc(100% - 250px);">
-        <h2 class="mt-4">Selamat Datang di Dashboard Catatan</h2>
-        <p class="lead">Kelola catatanmu dengan mudah!</p>
-
+        
         <!-- Form Pencarian -->
         <form method="GET" action="dashboard.php" class="search-box">
             <div class="input-group">
@@ -192,7 +203,7 @@ $notesResult = $conn->query($query);
             Tidak ada catatan ditemukan.
         </div>
     <?php endif; ?>
-</div>
+</div>  
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
