@@ -18,23 +18,15 @@ $categoriesResult = $conn->query($sql);
 // Ambil nilai pencarian dari form jika ada
 $searchKeyword = isset($_GET['search']) ? $_GET['search'] : '';
 
-// Ambil kategori yang dipilih
-$selectedCategory = isset($_GET['kategori_id']) ? $_GET['kategori_id'] : '';
-
-// Query untuk mengambil catatan, tambahkan filter judul dan kategori jika ada
+// Query untuk mengambil catatan, tambahkan filter judul jika ada
 $query = "SELECT notes.*, categories.nama_kategori 
           FROM notes 
           LEFT JOIN categories ON notes.kategori_id = categories.id 
           WHERE 1=1";
 
 if ($searchKeyword) {
-    // Tambahkan kondisi untuk pencarian berdasarkan judul
+    // Tambahkan kondisi untuk pencariann berdasarkan judul
     $query .= " AND notes.judul LIKE '%" . $conn->real_escape_string($searchKeyword) . "%'";
-}
-
-if ($selectedCategory) {
-    // Tambahkan kondisi untuk filter berdasarkan kategori
-    $query .= " AND notes.kategori_id = " . intval($selectedCategory);
 }
 
 $query .= " ORDER BY tanggal DESC";
@@ -102,12 +94,6 @@ $notesResult = $conn->query($query);
         .note-card {
             margin-top: 20px;
         }
-        .search-box {
-            margin-bottom: 20px;
-        }
-        .categories {
-            margin-bottom: 20px;
-        }
     </style>
 </head>
 <body>
@@ -118,13 +104,15 @@ $notesResult = $conn->query($query);
         <ul>
             <li><a href="dashboard.php">Dashboard</a></li>
             <li><a href="add_note.php">Tambah Catatan</a></li>
-            <li><a href="login.php">Keluar</a></li>
+            <li><a href="logout.php">Keluar</a></li>
         </ul>
     </div>
 
     <!-- Main Content -->
     <div class="content float-right" style="width: calc(100% - 250px);">
-        
+        <h2 class="mt-4">Selamat Datang di Dashboard Catatan</h2>
+        <p class="lead">Kelola catatanmu dengan mudah!</p>
+
         <!-- Form Pencarian -->
         <form method="GET" action="dashboard.php" class="search-box">
             <div class="input-group">
@@ -133,7 +121,9 @@ $notesResult = $conn->query($query);
                     <button class="btn btn-primary" type="submit">Cari</button>
                 </div>
             </div>
-            <div class="row mb-4">
+        </form>
+
+        <div class="row mb-4">
             <div class="col-md-4">
                 <div class="card card-category">
                     <div class="card-body text-center">
@@ -162,51 +152,34 @@ $notesResult = $conn->query($query);
                 </div>
             </div>
         </div>
-        </form>
-
-        <!-- Dropdown Kategori -->
-        <form method="GET" action="dashboard.php" class="categories">
-            <div class="form-group">
-                <label for="kategori">Cari berdasarkan kategori:</label>
-                <select name="kategori_id" id="kategori" class="form-control">
-                    <option value="">Semua Kategori</option>
-                    <?php while ($category = $categoriesResult->fetch_assoc()): ?>
-                        <option value="<?php echo $category['id']; ?>" <?php echo ($selectedCategory == $category['id']) ? 'selected' : ''; ?>>
-                            <?php echo $category['nama_kategori']; ?>
-                        </option>
-                    <?php endwhile; ?>
-                </select>
-            </div>
-            <button type="submit" class="btn btn-primary">Cari</button>
-        </form>
 
         <h4 class="mt-4">Catatan Terakhir:</h4>
-<div id="savedNotes">
-    <?php if ($notesResult && $notesResult->num_rows > 0): ?>
-        <?php while ($note = $notesResult->fetch_assoc()): ?>
-            <div class="card note-card">
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <a href="view_note.php?id=<?php echo $note['id']; ?>"><?php echo $note['judul']; ?></a>
-                    </h5>
-                    <p><strong>Kategori:</strong> <?php echo $note['nama_kategori']; ?></p>
-                    <p><strong>Tanggal:</strong> <?php echo $note['tanggal']; ?></p>
-                    <div class="d-flex">
-                        <a href="edit_note.php?id=<?php echo $note['id']; ?>" class="btn btn-warning mr-2">Edit</a>
-                        <a href="hapus_note.php?id=<?php echo $note['id']; ?>" class="btn btn-danger">Hapus</a>
+        <div id="savedNotes">
+            <?php if ($notesResult && $notesResult->num_rows > 0): ?>
+                <?php while ($note = $notesResult->fetch_assoc()): ?>
+                    <div class="card note-card">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="view_note.php?id=<?php echo $note['id']; ?>"><?php echo $note['judul']; ?></a>
+                            </h5>
+                            <p><strong>Kategori:</strong> <?php echo $note['nama_kategori']; ?></p>
+                            <p><strong>Tanggal:</strong> <?php echo $note['tanggal']; ?></p>
+                            <div class="d-flex">
+                                <a href="edit_note.php?id=<?php echo $note['id']; ?>" class="btn btn-warning mr-2">Edit</a>
+                                <a href="hapus_note.php?id=<?php echo $note['id']; ?>" class="btn btn-danger">Hapus</a>
+                            </div>
+                        </div>
                     </div>
+                <?php endwhile; ?>
+            <?php else: ?>
+                <div class="alert alert-warning" role="alert">
+                    Tidak ada catatan ditemukan.
                 </div>
-            </div>
-        <?php endwhile; ?>
-    <?php else: ?>
-        <div class="alert alert-warning" role="alert">
-            Tidak ada catatan ditemukan.
+            <?php endif; ?>
         </div>
-    <?php endif; ?>
-</div>  
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </body>
 </html>
