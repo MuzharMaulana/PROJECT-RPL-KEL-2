@@ -149,8 +149,8 @@ $notesResult = $conn->query($query);
                             <h5 class="card-title"><?php echo $note['judul']; ?></h5>
                             <p><strong>Kategori:</strong> <?php echo $note['nama_kategori']; ?></p>
                             <p><strong>Tanggal:</strong> <?php echo $note['tanggal']; ?></p>
-                            <div class="d-flex justify-content-between">
-                                  <a href="edit_note.php?id=<?php echo $note['id']; ?>" class="btn btn-warning mr-2">Edit</a>
+                            <div class="d-flex">
+                                 <a href="edit_note.php?id=<?php echo $note['id']; ?>" class="btn btn-warning mr-2">Edit</a>
                                  <a href="hapus_note.php?id=<?php echo $note['id']; ?>" class="btn btn-danger">Hapus</a>
                             </div>
                         </div>
