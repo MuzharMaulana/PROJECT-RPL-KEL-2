@@ -8,40 +8,15 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-// Jika sudah login, tampilkan dashboar
-?>
-
-<?php
-include 'config.php';
+// Jika sudah login, tampilkan dashboard
+include 'config.php'; // Pastikan ini termasuk sebelum query database
 
 // Ambil semua kategori dari database untuk dropdown
 $sql = "SELECT * FROM categories";
 $result = $conn->query($sql);
 
-// Cek apakah ada kategori atau judul yang dicari
-$selectedCategory = isset($_GET['kategori_id']) ? $_GET['kategori_id'] : '';
-$searchTitle = isset($_GET['judul']) ? $_GET['judul'] : '';
-
-// Query dasar untuk mengambil catatan
-$query = "SELECT notes.*, categories.nama_kategori FROM notes 
-          LEFT JOIN categories ON notes.kategori_id = categories.id";
-
-// Tambahkan filter kategori jika ada yang dipilih
-if ($selectedCategory) {
-    $query .= " WHERE notes.kategori_id = " . intval($selectedCategory);
-}
-
-// Tambahkan filter judul jika ada pencarian judul
-if (!empty($searchTitle)) {
-    // Jika kategori juga dipilih, tambahkan kondisi dengan AND
-    if ($selectedCategory) {
-        $query .= " AND notes.judul LIKE '%" . $conn->real_escape_string($searchTitle) . "%'";
-    } else {
-        $query .= " WHERE notes.judul LIKE '%" . $conn->real_escape_string($searchTitle) . "%'";
-    }
-}
-
-$notesResult = $conn->query($query);
+// Ambil catatan
+$notesResult = $conn->query("SELECT notes.*, categories.nama_kategori FROM notes LEFT JOIN categories ON notes.kategori_id = categories.id ORDER BY tanggal DESC");
 ?>
 
 <!DOCTYPE html>
@@ -50,97 +25,141 @@ $notesResult = $conn->query($query);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Catatan</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="sidebar.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"> <!-- Ikon Font Awesome -->
     <style>
-        .card {
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 16px;
-            margin-bottom: 20px;
-            transition: transform 0.2s;
+        body {
+            background-color: #f4f4f4;
         }
-
-        .card:hover {
-            transform: scale(1.02);
+        .sidebar {
+            height: 100vh;
+            padding: 20px;
+            background-color: #343a40;
+            position: fixed;
         }
-
-        .card h3 {
-            margin: 0;
-        }
-
-        .card .card-footer {
-            margin-top: 10px;
-        }
-
-        .button {
-            padding: 5px 10px;
-            border: none;
-            background-color: #007bff;
+        .sidebar h2 {
             color: white;
-            border-radius: 3px;
-            text-decoration: none;
+            font-size: 1.5rem;
+            margin-bottom: 30px;
         }
-
-        .button:hover {
-            background-color: #0056b3;
+        .sidebar ul {
+            padding: 0;
+            list-style-type: none;
+        }
+        .sidebar ul li {
+            margin: 15px 0;
+        }
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 5px;
+            display: block;
+            transition: background-color 0.3s;
+        }
+        .sidebar ul li a:hover {
+            background-color: #4d4957;
+        }
+        .content {
+            margin-left: 250px; /* Space for the sidebar */
+            padding: 30px;
+        }
+        .card-category {
+            border: 1px solid #007bff;
+            border-radius: 10px;
+            transition: transform 0.2s;
+            margin: 10px 0;
+        }
+        .card-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+        }
+        .btn-custom {
+            border-radius: 25px;
+        }
+        .note-card {
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="sidebar">
-            <h2>Menu</h2>
-            <ul>
-                <li><a href="dashboard.php" class="active">Dashboard</a></li>
-                <li><a href="add_note.php">Tambah Catatan</a></li>
-                <li><a href="login.php">Keluar</a></li>
-            </ul>
-        </div>
-        <div class="main-content">
-            <h2>Dashboard Catatan</h2>
-            <!-- Form Pencarian -->
-            <form method="GET" action="dashboard.php">
-                <div class="form-group">
-                    <label for="kategori">Pilih Kategori:</label>
-                    <select id="kategori" name="kategori_id" class="form-control">
-                        <option value="">Semua Kategori</option>
-                        <?php while ($row = $result->fetch_assoc()): ?>
-                            <option value="<?php echo $row['id']; ?>" <?php echo ($row['id'] == $selectedCategory) ? 'selected' : ''; ?>>
-                                <?php echo $row['nama_kategori']; ?>
-                            </option>
-                        <?php endwhile; ?>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="judul">Cari Judul Catatan:</label>
-                    <input type="text" id="judul" name="judul" class="form-control" placeholder="Masukkan judul catatan" value="<?php echo htmlspecialchars($searchTitle); ?>">
-                </div>
-                <button type="submit" class="btn btn-primary">Cari</button>
-            </form>
 
-            <h4 class="mt-4">Catatan Tersimpan:</h4>
-            <div id="savedNotes">
-                <?php if ($notesResult->num_rows > 0): ?>
-                    <div class="notes-container">
-                        <?php while ($note = $notesResult->fetch_assoc()): ?>
-                            <div class="card">
-                                <!-- Tampilkan hanya judul, kategori, dan tanggal -->
-                                <h3><a href="view_note.php?id=<?php echo $note['id']; ?>"><?php echo $note['judul']; ?></a></h3>
-                                <p><strong>Kategori:</strong> <?php echo $note['nama_kategori']; ?></p>
-                                <p><strong>Tanggal:</strong> <?php echo $note['tanggal']; ?></p>
-                                <div class="card-footer">
-                                    <a href="edit_note.php?id=<?php echo $note['id']; ?>" class="button">Edit</a>
-                                    <a href="hapus_note.php?id=<?php echo $note['id']; ?>" class="button" style="background-color: red;">Hapus</a>
-                                </div>
-                            </div>
-                        <?php endwhile; ?>
+    <!-- Sidebar -->
+    <div class="sidebar float-left">
+        <h2>Menu</h2>
+        <ul>
+            <li><a href="dashboard.php">Dashboard</a></li>
+            <li><a href="kuliah.php">Kuliah</a></li>
+            <li><a href="kantor.php">Kantor</a></li>
+            <li><a href="pribadi.php">Pribadi</a></li>
+            <li><a href="add_note.php">Tambah Catatan</a></li>
+            <li><a href="logout.php">Keluar</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content float-right" style="width: calc(100% - 250px);">
+        <h2 class="mt-4">Selamat Datang di Dashboard Catatan</h2>
+        <p class="lead">Pilih kategori untuk melihat catatan Anda:</p>
+
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="card card-category">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Kuliah</h5>
+                        <p class="card-text">Lihat semua catatan kuliah Anda.</p>
+                        <a href="kuliah.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
                     </div>
-                <?php else: ?>
-                    <p>Tidak ada catatan ditemukan.</p>
-                <?php endif; ?>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-category">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Kantor</h5>
+                        <p class="card-text">Lihat semua catatan kantor Anda.</p>
+                        <a href="kantor.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-category">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Pribadi</h5>
+                        <p class="card-text">Lihat semua catatan pribadi Anda.</p>
+                        <a href="pribadi.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
+                    </div>
+                </div>
             </div>
         </div>
+
+        <h4 class="mt-4">Catatan Terakhir:</h4>
+        <div id="savedNotes">
+            <?php if ($notesResult && $notesResult->num_rows > 0): ?>
+                <?php while ($note = $notesResult->fetch_assoc()): ?>
+                    <div class="card note-card">
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo $note['judul']; ?></h5>
+                            <p class="card-text"><?php echo $note['catatan']; ?></p>
+                            <p><strong>Kategori:</strong> <?php echo $note['nama_kategori']; ?></p>
+                            <p><strong>Tanggal:</strong> <?php echo $note['tanggal']; ?></p>
+                            <div class="d-flex justify-content-between">
+                                <a href="edit_note.php?id=<?php echo $note['id']; ?>" class="btn btn-warning btn-custom">Edit</a>
+                                <a href="hapus_note.php?id=<?php echo $note['id']; ?>" class="btn btn-danger btn-custom">Hapus</a>
+                            </div>
+                        </div>
+                    </div>
+                <?php endwhile; ?>
+            <?php else: ?>
+                <div class="alert alert-warning" role="alert">
+                    Tidak ada catatan ditemukan.
+                </div>
+            <?php endif; ?>
+        </div>
     </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
