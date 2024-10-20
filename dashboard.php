@@ -127,7 +127,7 @@ $notesResult = $conn->query($query);
         <!-- Dropdown Kategori -->
         <form method="GET" action="dashboard.php" class="categories">
             <div class="form-group">
-                <label for="kategori">Filter berdasarkan Kategori:</label>
+                <label for="kategori">cari berdasarkan kategori:</label>
                 <select name="kategori_id" id="kategori" class="form-control">
                     <option value="">Semua Kategori</option>
                     <?php while ($category = $categoriesResult->fetch_assoc()): ?>
@@ -137,7 +137,7 @@ $notesResult = $conn->query($query);
                     <?php endwhile; ?>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">Filter</button>
+            <button type="submit" class="btn btn-primary">cari</button>
         </form>
 
         <h4 class="mt-4">Catatan Terakhir:</h4>
@@ -150,8 +150,8 @@ $notesResult = $conn->query($query);
                             <p><strong>Kategori:</strong> <?php echo $note['nama_kategori']; ?></p>
                             <p><strong>Tanggal:</strong> <?php echo $note['tanggal']; ?></p>
                             <div class="d-flex justify-content-between">
-                                <a href="edit_note.php?id=<?php echo $note['id']; ?>" class="btn btn-warning btn-custom">Edit</a>
-                                <a href="hapus_note.php?id=<?php echo $note['id']; ?>" class="btn btn-danger btn-custom">Hapus</a>
+                                  <a href="edit_note.php?id=<?php echo $note['id']; ?>" class="btn btn-warning mr-2">Edit</a>
+                                 <a href="hapus_note.php?id=<?php echo $note['id']; ?>" class="btn btn-danger">Hapus</a>
                             </div>
                         </div>
                     </div>
