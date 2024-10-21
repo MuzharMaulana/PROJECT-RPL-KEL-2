@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"> <!-- Ikon Font Awesome -->    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"> <!-- Ikon Font Awesome -->
 
     <style>
         body {
@@ -17,7 +17,7 @@
             padding: 0;
         }
         .sidebar {
-            width: 220px; /* Sesuaikan lebar sidebar */
+            width: 250px; /* Lebar sidebar */
             background-color: #007bff; /* Warna biru sidebar */
             color: white;
             padding: 20px 15px; /* Sesuaikan padding sidebar */
@@ -41,7 +41,7 @@
             padding: 10px;
             display: flex;
             align-items: center;
-            font-size: 16px; /* Ukuran font dikurangi */
+            font-size: 14px; /* Ukuran font diperkecil */
         }
         .sidebar ul li a:hover {
             background-color: #0056b3;
@@ -49,7 +49,7 @@
         }
         .sidebar ul li a i {
             margin-right: 8px;
-            font-size: 20px; /* Ukuran ikon dikurangi */
+            font-size: 20px;
         }
         .main-content {
             flex: 1;
@@ -75,11 +75,22 @@
         <div class="sidebar">
             <h2>Menu</h2>
             <ul>
-                <li><a href="dashboard.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                <li><a href="add_note.php"><i class="fas fa-plus"></i> Tambah Catatan</a></li>
+                <li><a href="dashboard.php"><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
+                <li><a href="add_note.php"><i class="fas fa-plus"></i>Tambah Catatan</a></li>
+
+                <!-- Dropdown untuk Kategori -->
+                <li>
+                    <a href="#kategoriSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-list"></i> Kategori
+                    </a>
+                    <ul class="collapse list-unstyled" id="kategoriSubmenu">
+                        <li><a href="kuliah.php"><i class="fas fa-book"></i> Kuliah</a></li>
+                        <li><a href="kantor.php"><i class="fas fa-briefcase"></i> Kantor</a></li>
+                        <li><a href="pribadi.php"><i class="fas fa-user"></i> Pribadi</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
-
 
         <div class="main-content">
             <h2>Tambah Catatan</h2>
