@@ -114,7 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="password" name="password" placeholder="Password" required>
             <button type="submit">Masuk</button>
         </form>
-        <p>Belum punya akun? <a href="login.php">Buat akun disini</a></p>
+        <p>Belum punya akun? <a href="register.php">Buat akun disini</a></p>
     </div>
 </body>
 </html>
