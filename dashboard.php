@@ -129,9 +129,6 @@ $notesResult = $conn->query($query);
         }
     </style>
 
-        
-    
-    
 </head>
 <body>
 
