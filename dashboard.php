@@ -48,8 +48,11 @@ $notesResult = $conn->query($query);
         .sidebar {
             height: 100vh;
             padding: 20px;
-            background-color: #343a40;
+            background-color: #007bff; /* Ubah warna sidebar menjadi biru */
             position: fixed;
+            transition: all 0.3s;
+            width: 250px;
+            overflow-y: auto;
         }
         .sidebar h2 {
             color: white;
@@ -68,15 +71,20 @@ $notesResult = $conn->query($query);
             text-decoration: none;
             padding: 10px;
             border-radius: 5px;
-            display: block;
+            display: flex;
+            align-items: center;
             transition: background-color 0.3s;
         }
+        .sidebar ul li a i {
+            margin-right: 10px;
+        }
         .sidebar ul li a:hover {
-            background-color: #4d4957;
+            background-color: #0056b3; /* Warna hover yang lebih gelap */
         }
         .content {
-            margin-left: 250px; /* Space for the sidebar */
+            margin-left: 250px; 
             padding: 30px;
+            transition: margin-left 0.3s;
         }
         .card-category {
             border: 1px solid #007bff;
@@ -94,7 +102,36 @@ $notesResult = $conn->query($query);
         .note-card {
             margin-top: 20px;
         }
+
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: absolute;
+                left: -250px;
+                top: 0;
+                z-index: 999;
+                width: 250px;
+                transition: all 0.3s;
+            }
+            .sidebar.open {
+                left: 0;
+            }
+            .content {
+                margin-left: 0;
+            }
+            .sidebar-toggle {
+                display: block;
+                position: fixed;
+                left: 10px;
+                top: 10px;
+                z-index: 1000;
+            }
+        }
     </style>
+
+        
+    
+    
 </head>
 <body>
 
@@ -102,16 +139,15 @@ $notesResult = $conn->query($query);
     <div class="sidebar float-left">
         <h2>Menu</h2>
         <ul>
-            <li><a href="dashboard.php">Dashboard</a></li>
-            <li><a href="add_note.php">Tambah Catatan</a></li>
-            <li><a href="login.php">Keluar</a></li>
+            <li><a href="dashboard.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="add_note.php"><i class="fas fa-plus"></i> Tambah Catatan</a></li>
+            <li><a href="login.php"><i class="fas fa-sign-out-alt"></i> Keluar</a></li>
         </ul>
     </div>
 
     <!-- Main Content -->
     <div class="content float-right" style="width: calc(100% - 250px);">
-        <h2 class="mt-4">Selamat Datang di Dashboard Catatan</h2>
-        <p class="lead">Kelola catatanmu dengan mudah!</p>
+        
 
         <!-- Form Pencarian -->
         <form method="GET" action="dashboard.php" class="search-box">
@@ -177,6 +213,7 @@ $notesResult = $conn->query($query);
                 </div>
             <?php endif; ?>
         </div>
+
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
