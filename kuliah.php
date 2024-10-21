@@ -1,23 +1,16 @@
 <?php
-session_start(); // Mulai sesi
+session_start();
+include 'config.php';
 
-// Cek apakah pengguna sudah login
-if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
-    exit();
-}
+// ID kategori Kantor (misalnya 2)
+$kategoriId = 2;
 
-// Tampilkan catatan untuk kategori kuliah
-include 'config.php'; // Pastikan ini termasuk sebelum query database
+// Ambil catatan dengan kategori Kantor
+$query = "SELECT notes.*, categories.nama_kategori FROM notes 
+          LEFT JOIN categories ON notes.kategori_id = categories.id
+          WHERE notes.kategori_id = " . intval($kategoriId);
 
-// Ambil catatan untuk kategori kuliah
-$sql = "SELECT notes.*, categories.nama_kategori 
-        FROM notes 
-        LEFT JOIN categories ON notes.kategori_id = categories.id 
-        WHERE categories.nama_kategori = 'kuliah' 
-        ORDER BY tanggal DESC";
-
-$notesResult = $conn->query($sql);
+$notesResult = $conn->query($query);
 ?>
 
 <!DOCTYPE html>
@@ -90,8 +83,8 @@ $notesResult = $conn->query($sql);
                     <i class="fas fa-list"></i> Kategori
                 </a>
                 <ul class="collapse list-unstyled" id="kategoriSubmenu">
-                    <li><a href="catatan_kantor.php"><i class="fas fa-briefcase"></i> Kantor</a></li>
-                    <li><a href="catatan_pribadi.php"><i class="fas fa-user"></i> Pribadi</a></li>
+                    <li><a href="kantor.php"><i class="fas fa-briefcase"></i> Kantor</a></li>
+                    <li><a href="pribadi.php"><i class="fas fa-user"></i> Pribadi</a></li>
                 </ul>
             </li>
         </ul>
