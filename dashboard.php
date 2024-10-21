@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-// Jika sudah login, tampilkan dashboard
+// Jika sudah login, tampilkan dashboar
 include 'config.php'; // Pastikan ini termasuk sebelum query database
 
 // Ambil semua kategori dari database untuk dropdown
@@ -25,7 +25,7 @@ $query = "SELECT notes.*, categories.nama_kategori
           WHERE 1=1";
 
 if ($searchKeyword) {
-    // Tambahkan kondisi untuk pencariann berdasarkan judul
+    // Tambahkan kondisi untuk pencarian berdasarkan judul
     $query .= " AND notes.judul LIKE '%" . $conn->real_escape_string($searchKeyword) . "%'";
 }
 
@@ -181,5 +181,6 @@ $notesResult = $conn->query($query);
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    </body>
+    </div>
+</body>
 </html>
