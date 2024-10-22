@@ -92,7 +92,7 @@ $notesResult = $conn->query($query);
 
     <div class="main-content">
         <div class="container mt-5">
-            <h2>Catatan Kuliah</h2>
+            <h2>Catatan Pribadi</h2>
             <div id="savedNotes">
                 <?php if ($notesResult->num_rows > 0): ?>
                     <div class="row">
