@@ -1,19 +1,19 @@
 <?php
 include 'config.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $judul = $_POST['judul'];
     $kategori_id = $_POST['kategori_id'];
     $catatan = $_POST['catatan'];
 
-    // Menyimpan catatan ke database
-    $sql = "INSERT INTO notes (judul, kategori_id, catatan, tanggal) VALUES ('$judul', $kategori_id, '$catatan', NOW())";
+    $sql = "INSERT INTO notes (judul, kategori_id, catatan) VALUES (?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('sis', $judul, $kategori_id, $catatan);
 
-    if ($conn->query($sql) === TRUE) {
-        header("Location: dashboard.php"); // Redirect ke dashboard setelah berhasil
-        exit;
+    if ($stmt->execute()) {
+        header('Location: dashboard.php'); // Redirect setelah berhasil
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        echo "Error: " . $stmt->error;
     }
 }
 

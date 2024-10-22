@@ -1,3 +1,11 @@
+<?php
+include 'config.php';
+
+// Ambil semua kategori dari database untuk dropdown
+$sql = "SELECT * FROM categories";
+$result = $conn->query($sql);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -77,8 +85,6 @@
             <ul>
                 <li><a href="dashboard.php"><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
                 <li><a href="add_note.php"><i class="fas fa-plus"></i>Tambah Catatan</a></li>
-
-                <!-- Dropdown untuk Kategori -->
                 <li>
                     <a href="#kategoriSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="fas fa-list"></i> Kategori
@@ -103,7 +109,26 @@
                     <label for="kategori" class="form-label">Kategori:</label>
                     <select id="kategori" name="kategori_id" class="form-select" required>
                         <option value="">Pilih Kategori</option>
-                        <?php // PHP code for populating categories ?>
+                        <?php
+                        // Memastikan kategori "Kuliah", "Kantor", dan "Pribadi" ada
+                        $defaultCategories = [
+                            ['id' => 1, 'nama' => 'Kuliah'],
+                            ['id' => 2, 'nama' => 'Kantor'],
+                            ['id' => 3, 'nama' => 'Pribadi']
+                        ];
+
+                        // Fetch categories from database and add them to the dropdown
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                echo "<option value='" . $row['id'] . "'>" . $row['nama'] . "</option>";
+                            }
+                        }
+
+                        // Menambahkan kategori default jika belum ada di database
+                        foreach ($defaultCategories as $category) {
+                            echo "<option value='" . $category['id'] . "'>" . $category['nama'] . "</option>";
+                        }
+                        ?> 
                     </select>
                 </div>
                 <div class="mb-3">
