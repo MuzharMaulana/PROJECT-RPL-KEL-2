@@ -55,6 +55,7 @@ $notesResult = $conn->query($query);
             overflow-y: auto;
         }
         .sidebar h2 {
+            text-align: center;
             color: white;
             font-size: 1.5rem;
             margin-bottom: 30px;
