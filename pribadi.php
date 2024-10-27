@@ -27,7 +27,7 @@ $notesResult = $conn->query($query);
     <style>
         .sidebar {
             width: 250px;
-            background-color: #0000ff;
+            background-color: #007bffff;
             color: white;
             padding: 20px;
             height: 100vh;

@@ -48,7 +48,7 @@ $notesResult = $conn->query($query);
         .sidebar {
             height: 100vh;
             padding: 20px;
-            background-color: #0000ff; /* Ubah warna sidebar menjadi biru */
+            background-color: #007bffff; /* Ubah warna sidebar menjadi biru */
             position: fixed;
             transition: all 0.3s;
             width: 250px;

@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         /* CSS untuk halaman login */
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
+            background: linear-gradient(135deg, #007bff, #00c6ff); /* Gradasi warna biru */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         .container {
-            background-color: #fff;
+            background-color: rgba(255, 255, 255, 0.9); /* Warna putih dengan sedikit transparansi */
             padding: 40px;
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
@@ -114,7 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="password" name="password" placeholder="Password" required>
             <button type="submit">Buat akun</button>
         </form>
-        <p>Sudah punya akun? <a href="login.php">Masuk disini</a></p>
+        <p>Sudah punya akun? <a href="login.php">Login di sini</a></p>
     </div>
 </body>
 </html>

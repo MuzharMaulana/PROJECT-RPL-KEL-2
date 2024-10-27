@@ -24,7 +24,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -34,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         /* CSS untuk halaman login */
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
+            background: linear-gradient(135deg, #007bff, #00c6ff); /* Gradasi warna biru */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -43,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         .container {
-            background-color: #fff;
+            background-color: rgba(255, 255, 255, 0.9); /* Warna putih dengan sedikit transparansi */
             padding: 40px;
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);

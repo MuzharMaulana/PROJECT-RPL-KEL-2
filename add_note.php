@@ -22,7 +22,7 @@ include 'config.php';
         }
         .sidebar {
             width: 250px; /* Lebar sidebar */
-            background-color: #0000ff; /* Warna biru sidebar */
+            background-color: #007bffff; /* Warna biru sidebar */
             color: white;
             padding: 20px 15px; /* Sesuaikan padding sidebar */
             height: 100vh;
