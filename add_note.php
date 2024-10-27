@@ -1,3 +1,7 @@
+<?php
+include 'config.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -77,8 +81,6 @@
             <ul>
                 <li><a href="dashboard.php"><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
                 <li><a href="add_note.php"><i class="fas fa-plus"></i>Tambah Catatan</a></li>
-
-                <!-- Dropdown untuk Kategori -->
                 <li>
                     <a href="#kategoriSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="fas fa-list"></i> Kategori
@@ -103,7 +105,9 @@
                     <label for="kategori" class="form-label">Kategori:</label>
                     <select id="kategori" name="kategori_id" class="form-select" required>
                         <option value="">Pilih Kategori</option>
-                        <?php // PHP code for populating categories ?>
+                        <option value="1">Kuliah</option>
+                        <option value="2">Kantor</option>
+                        <option value="3">Pribadi</option>
                     </select>
                 </div>
                 <div class="mb-3">
