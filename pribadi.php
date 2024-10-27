@@ -84,7 +84,7 @@ $notesResult = $conn->query($query);
                 </a>
                 <ul class="collapse list-unstyled" id="kategoriSubmenu">
                     <li><a href="kuliah.php"><i class="fas fa-book"></i> Kuliah</a></li>
-                    <li><a href="kantor.php"><i class="fas fa-user"></i> Pribadi</a></li>
+                    <li><a href="kantor.php"><i class="fas fa-briefcase"></i> Kantor</a></li>
                 </ul>
             </li>
         </ul>
@@ -92,7 +92,7 @@ $notesResult = $conn->query($query);
 
     <div class="main-content">
         <div class="container mt-5">
-            <h2>Catatan Kuliah</h2>
+            <h2>Catatan Pribadi</h2>
             <div id="savedNotes">
                 <?php if ($notesResult->num_rows > 0): ?>
                     <div class="row">

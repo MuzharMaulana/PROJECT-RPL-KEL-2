@@ -98,10 +98,11 @@ $notesResult = $conn->query($query);
                     <?php while ($note = $notesResult->fetch_assoc()): ?>
                         <div class="card mb-3">
                             <div class="card-body">
-                                <h5 class="card-title"><?php echo $note['judul']; ?></h5>
-                                <p><strong>Tanggal:</strong> <?php echo $note['tanggal']; ?></p>
-                                <div class="d-flex">
-                                    <a href="edit_note.php?id=<?php echo $note['id']; ?>" class="btn btn-warning mr-2">Edit</a>
+                            <h5 class="card-title"><?php echo $note['judul']; ?></h5>
+                                    <p class="card-text"><?php echo $note['catatan']; ?></p>
+                                    <p><strong>Kategori:</strong> <?php echo $note['nama_kategori']; ?></p>
+                                    <p><strong>Tanggal:</strong> <?php echo $note['tanggal']; ?></p>
+                                    <a href="edit_note.php?id=<?php echo $note['id']; ?>" class="btn btn-warning">Edit</a>
                                     <a href="hapus_note.php?id=<?php echo $note['id']; ?>" class="btn btn-danger">Hapus</a>
                                 </div>
                             </div>
