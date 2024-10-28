@@ -30,7 +30,7 @@ $notesResult = $conn->query($query);
             background-color: #007bffff;
             color: white;
             padding: 20px;
-            height: 100vh;
+            height: 230vh;
         }
         .sidebar h2 {
             text-align: center;

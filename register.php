@@ -2,6 +2,8 @@
 // Sertakan file konfigurasi
 include 'config.php';
 
+$message = ""; // Variabel untuk menyimpan pesan
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Enkripsi password
@@ -13,14 +15,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $checkUser->get_result();
 
     if ($result->num_rows > 0) {
-        echo "<div class='alert alert-danger text-center'>Username sudah terdaftar.</div>";
+        $message = "Username sudah tersedia";
     } else {
         // Simpan pengguna
         $stmt = $conn->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
         $stmt->bind_param("ss", $username, $password);
         $stmt->execute();
 
-        echo "<div class='alert alert-success text-center'>Pendaftaran berhasil! Silakan login.</div>";
+        $message = "Pendaftaran berhasil! Silakan login";
     }
 }
 ?>
@@ -31,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <title>Register</title>
     <style>
-        /* CSS untuk halaman login */
+        /* CSS untuk halaman registrasi */
         body {
             font-family: 'Arial', sans-serif;
             background: url('notebook.jpg')no-repeat center center fixed;
@@ -41,10 +43,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             align-items: center;
             height: 100vh;
             margin: 0;
+            flex-direction: column;
         }
 
         .container {
             background-color: rgba(255, 255, 255, 0.9); /* Warna putih dengan sedikit transparansi */
+            background-image: radial-gradient(circle, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+            background-size: 15px 15px;
             padding: 40px;
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
@@ -105,9 +110,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         p a:hover {
             text-decoration: underline;
         }
+
+        .alert-message {
+            color: white;
+            margin-top: 10px;
+            font-size: 16px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
+    <?php if ($message): ?>
+        <div class="alert-message"><?php echo $message; ?></div>
+    <?php endif; ?>
+
     <div class="container">
         <h2>Register</h2>
         <form method="POST" action="">
