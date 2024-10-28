@@ -197,7 +197,7 @@ $notesResult = $conn->query($query);
     </div>
 </div>
 
-<!-- Baris kedua dengan 2 kartu tepat di tengah -->
+<!-- Baris kedua dengan 2 kartu di tengah -->
 <div class="row mb-3 d-flex justify-content-center">
     <div class="col-md-3">
         <div class="card card-category">
@@ -258,6 +258,20 @@ $notesResult = $conn->query($query);
         </div>
     </div>
 </div>
+
+<!-- Baris terakhir dengan 1 kartu di tengah -->
+<div class="row mb-3 d-flex justify-content-center">
+    <div class="col-md-3">
+        <div class="card card-category">
+            <div class="card-body text-center">
+                <h5 class="card-title">Adan</h5>
+                <p class="card-text">Lihat semua catatan pribadi Anda.</p>
+                <a href="pribadi.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 
