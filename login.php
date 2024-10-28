@@ -3,6 +3,8 @@ session_start(); // Mulai sesi
 // Sertakan file konfigurasi
 include 'config.php';
 
+$message = ""; // Variabel untuk menyimpan pesan
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -20,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: dashboard.php"); // Arahkan ke dashboard
         exit();
     } else {
-        echo "Username atau password salah.";
+        $message = "Username atau password salah"; // Simpan pesan kesalahan
     }
 }
 ?>
@@ -39,10 +41,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             align-items: center;
             height: 100vh;
             margin: 0;
+            flex-direction: column;
         }
 
         .container {
             background-color: rgba(255, 255, 255, 0.9); /* Warna putih dengan sedikit transparansi */
+            background-image: radial-gradient(circle, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+            background-size: 15px 15px;
             padding: 40px;
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
@@ -103,9 +108,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         p a:hover {
             text-decoration: underline;
         }
+
+        .alert-message {
+            color: white;
+            margin-top: 10px;
+            font-size: 16px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
+    <?php if ($message): ?>
+        <div class="alert-message"><?php echo $message; ?></div>
+    <?php endif; ?>
+
     <div class="container">
         <h2>Login</h2>
         <form method="POST" action="">
