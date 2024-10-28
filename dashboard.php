@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-// Jika sudah login, tampilkan dashboar
+// Jika sudah login, tampilkan dashboard
 include 'config.php'; // Pastikan ini termasuk sebelum query database
 
 // Ambil semua kategori dari database untuk dropdown
@@ -103,7 +103,22 @@ $notesResult = $conn->query($query);
         .note-card {
             margin-top: 20px;
         }
-        .
+
+        /* CSS untuk tombol Edit */
+        .btn-edit {
+            background-color: #f7bb07; /* Warna kuning */
+            color: white; /* Warna teks */
+        }
+
+        /* CSS untuk tombol Hapus */
+        .btn-hapus {
+            background-color: #dc3545; /* Warna merah */
+            color: white;
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+       
 
         /* Responsiveness */
         @media (max-width: 768px) {
@@ -146,7 +161,6 @@ $notesResult = $conn->query($query);
 
     <!-- Main Content -->
     <div class="content float-right" style="width: calc(100% - 250px);">
-        
 
         <!-- Form Pencarian -->
         <form method="GET" action="dashboard.php" class="search-box">
@@ -157,123 +171,36 @@ $notesResult = $conn->query($query);
                 </div>
             </div>
         </form>
-<!-- Baris pertama dengan 4 kartu -->
-<div class="row mb-3">
-    <div class="col-md-3">
-        <div class="card card-category">
-            <div class="card-body text-center">
-                <h5 class="card-title">Kuliah</h5>
-                <p class="card-text">Lihat semua catatan kuliah Anda.</p>
-                <a href="kuliah.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card card-category">
-            <div class="card-body text-center">
-                <h5 class="card-title">Kantor</h5>
-                <p class="card-text">Lihat semua catatan kantor Anda.</p>
-                <a href="kantor.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card card-category">
-            <div class="card-body text-center">
-                <h5 class="card-title">Pribadi</h5>
-                <p class="card-text">Lihat semua catatan pribadi Anda.</p>
-                <a href="pribadi.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card card-category">
-            <div class="card-body text-center">
-                <h5 class="card-title">Adhan</h5>
-                <p class="card-text">Lihat semua catatan pribadi Anda.</p>
-                <a href="pribadi.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
-            </div>
-        </div>
-    </div>
-</div>
 
-<!-- Baris kedua dengan 2 kartu di tengah -->
-<div class="row mb-3 d-flex justify-content-center">
-    <div class="col-md-3">
-        <div class="card card-category">
-            <div class="card-body text-center">
-                <h5 class="card-title">Adan</h5>
-                <p class="card-text">Lihat semua catatan pribadi Anda.</p>
-                <a href="pribadi.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="card card-category">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Kuliah</h5>
+                        <p class="card-text">Lihat semua catatan kuliah Anda</p>
+                        <a href="kuliah.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-category">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Kantor</h5>
+                        <p class="card-text">Lihat semua catatan kantor Anda</p>
+                        <a href="kantor.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-category">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Pribadi</h5>
+                        <p class="card-text">Lihat semua catatan pribadi Anda</p>
+                        <a href="pribadi.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card card-category">
-            <div class="card-body text-center">
-                <h5 class="card-title">Adan</h5>
-                <p class="card-text">Lihat semua catatan pribadi Anda.</p>
-                <a href="pribadi.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Baris ketiga dengan 4 kartu -->
-<div class="row mb-3">
-    <div class="col-md-3">
-        <div class="card card-category">
-            <div class="card-body text-center">
-                <h5 class="card-title">Adan</h5>
-                <p class="card-text">Lihat semua catatan pribadi Anda.</p>
-                <a href="pribadi.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card card-category">
-            <div class="card-body text-center">
-                <h5 class="card-title">Adan</h5>
-                <p class="card-text">Lihat semua catatan pribadi Anda.</p>
-                <a href="pribadi.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card card-category">
-            <div class="card-body text-center">
-                <h5 class="card-title">Adan</h5>
-                <p class="card-text">Lihat semua catatan pribadi Anda.</p>
-                <a href="pribadi.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card card-category">
-            <div class="card-body text-center">
-                <h5 class="card-title">Adan</h5>
-                <p class="card-text">Lihat semua catatan pribadi Anda.</p>
-                <a href="pribadi.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Baris terakhir denggin 1 kartu di tengah -->
-<div class="row mb-3 d-flex justify-content-center">
-    <div class="col-md-3">
-        <div class="card card-category">
-            <div class="card-body text-center">
-                <h5 class="card-title">Adan</h5>
-                <p class="card-text">Lihat semua catatan pribadi Anda.</p>
-                <a href="pribadi.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
 
         <h4 class="mt-4">Catatan Terakhir:</h4>
         <div id="savedNotes">
@@ -287,8 +214,8 @@ $notesResult = $conn->query($query);
                             <p><strong>Kategori:</strong> <?php echo $note['nama_kategori']; ?></p>
                             <p><strong>Tanggal:</strong> <?php echo $note['tanggal']; ?></p>
                             <div class="d-flex">
-                                <a href="edit_note.php?id=<?php echo $note['id']; ?>" class="btn btn-warning mr-2">Edit</a>
-                                <a href="hapus_note.php?id=<?php echo $note['id']; ?>" class="btn btn-danger">Hapus</a>
+                                <a href="edit_note.php?id=<?php echo $note['id']; ?>" class="btn btn-edit mr-2">Edit</a>
+                                <a href="hapus_note.php?id=<?php echo $note['id']; ?>" class="btn btn-hapus">Hapus</a>
                             </div>
                         </div>
                     </div>
@@ -299,7 +226,6 @@ $notesResult = $conn->query($query);
                 </div>
             <?php endif; ?>
         </div>
-
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
