@@ -200,7 +200,7 @@ $notesResult = $conn->query($query);
         <div class="col-md-4">
             <div class="card card-category">
                 <div class="card-body text-center">
-                    <h5 class="card-title">Adan</h5>
+                    <h5 class="card-title">Adann</h5>
                     <p class="card-text">Lihat semua catatan Adan Anda.</p>
                     <a href="adan.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
                 </div>
