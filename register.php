@@ -36,7 +36,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         /* CSS untuk halaman registrasi */
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #007bff, #00c6ff); /* Gradasi warna biru */
+            background: url('notebook.jpg')no-repeat center center fixed;
+            background-size: cover;
             display: flex;
             justify-content: center;
             align-items: center;
