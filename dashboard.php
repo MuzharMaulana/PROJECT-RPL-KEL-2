@@ -259,7 +259,7 @@ $notesResult = $conn->query($query);
     </div>
 </div>
 
-<!-- Baris terakhir dengan 1 kartu di tengah -->
+<!-- Baris terakhir denggin 1 kartu di tengah -->
 <div class="row mb-3 d-flex justify-content-center">
     <div class="col-md-3">
         <div class="card card-category">
