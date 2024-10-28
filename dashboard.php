@@ -110,6 +110,15 @@ $notesResult = $conn->query($query);
             color: white; /* Warna teks */
         }
 
+        /* CSS untuk tombol Hapus */
+        .btn-hapus {
+            background-color: #dc3545; /* Warna merah */
+            color: white;
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+       
 
         /* Responsiveness */
         @media (max-width: 768px) {
@@ -206,7 +215,7 @@ $notesResult = $conn->query($query);
                             <p><strong>Tanggal:</strong> <?php echo $note['tanggal']; ?></p>
                             <div class="d-flex">
                                 <a href="edit_note.php?id=<?php echo $note['id']; ?>" class="btn btn-edit mr-2">Edit</a>
-                                <a href="hapus_note.php?id=<?php echo $note['id']; ?>" class="btn btn-danger">Hapus</a>
+                                <a href="hapus_note.php?id=<?php echo $note['id']; ?>" class="btn btn-hapus">Hapus</a>
                             </div>
                         </div>
                     </div>
