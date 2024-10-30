@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         /* CSS untuk halaman registrasi */
         body {
             font-family: 'Arial', sans-serif;
-            background: url('notebook.jpg')no-repeat center center fixed;
+            background: url('notebook1.jpg')no-repeat center center fixed;
             background-size: cover;
             display: flex;
             justify-content: center;
