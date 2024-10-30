@@ -157,123 +157,36 @@ $notesResult = $conn->query($query);
                 </div>
             </div>
         </form>
-<!-- Baris pertama dengan 4 kartu -->
-<div class="row mb-3">
-    <div class="col-md-3">
-        <div class="card card-category">
-            <div class="card-body text-center">
-                <h5 class="card-title">Kuliah</h5>
-                <p class="card-text">Lihat semua catatan kuliah Anda.</p>
-                <a href="kuliah.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card card-category">
-            <div class="card-body text-center">
-                <h5 class="card-title">Kantor</h5>
-                <p class="card-text">Lihat semua catatan kantor Anda.</p>
-                <a href="kantor.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card card-category">
-            <div class="card-body text-center">
-                <h5 class="card-title">Pribadi</h5>
-                <p class="card-text">Lihat semua catatan pribadi Anda.</p>
-                <a href="pribadi.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card card-category">
-            <div class="card-body text-center">
-                <h5 class="card-title">Adhan</h5>
-                <p class="card-text">Lihat semua catatan pribadi Anda.</p>
-                <a href="pribadi.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
-            </div>
-        </div>
-    </div>
-</div>
 
-<!-- Baris kedua dengan 2 kartu di tengah -->
-<div class="row mb-3 d-flex justify-content-center">
-    <div class="col-md-3">
-        <div class="card card-category">
-            <div class="card-body text-center">
-                <h5 class="card-title">Adan</h5>
-                <p class="card-text">Lihat semua catatan pribadi Anda.</p>
-                <a href="pribadi.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="card card-category">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Kuliah</h5>
+                        <p class="card-text">Lihat semua catatan kuliah Anda.</p>
+                        <a href="kuliah.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-category">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Kantor</h5>
+                        <p class="card-text">Lihat semua catatan kantor Anda.</p>
+                        <a href="kantor.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-category">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Pribadi</h5>
+                        <p class="card-text">Lihat semua catatan pribadi Anda.</p>
+                        <a href="pribadi.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card card-category">
-            <div class="card-body text-center">
-                <h5 class="card-title">Adan</h5>
-                <p class="card-text">Lihat semua catatan pribadi Anda.</p>
-                <a href="pribadi.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Baris ketiga dengan 4 kartu -->
-<div class="row mb-3">
-    <div class="col-md-3">
-        <div class="card card-category">
-            <div class="card-body text-center">
-                <h5 class="card-title">Adan</h5>
-                <p class="card-text">Lihat semua catatan pribadi Anda.</p>
-                <a href="pribadi.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card card-category">
-            <div class="card-body text-center">
-                <h5 class="card-title">Adan</h5>
-                <p class="card-text">Lihat semua catatan pribadi Anda.</p>
-                <a href="pribadi.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card card-category">
-            <div class="card-body text-center">
-                <h5 class="card-title">Adan</h5>
-                <p class="card-text">Lihat semua catatan pribadi Anda.</p>
-                <a href="pribadi.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card card-category">
-            <div class="card-body text-center">
-                <h5 class="card-title">Adan</h5>
-                <p class="card-text">Lihat semua catatan pribadi Anda.</p>
-                <a href="pribadi.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Baris terakhir denggin 1 kartu di tengah -->
-<div class="row mb-3 d-flex justify-content-center">
-    <div class="col-md-3">
-        <div class="card card-category">
-            <div class="card-body text-center">
-                <h5 class="card-title">Adan</h5>
-                <p class="card-text">Lihat semua catatan pribadi Anda.</p>
-                <a href="pribadi.php" class="btn btn-primary btn-custom">Lihat Kategori</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
 
         <h4 class="mt-4">Catatan Terakhir:</h4>
         <div id="savedNotes">
